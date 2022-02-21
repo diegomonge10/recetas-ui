@@ -1,0 +1,56 @@
+<mat-card>
+  <mat-card-content>
+
+    <mat-card-title>
+      Recetas
+      <div class="button-row" style="float: right">
+        <button mat-raised-button color="primary" (click)="newReceta()">+ NUEVO</button>
+      </div>
+    </mat-card-title>
+
+    <br>
+    <mat-form-field appearance="standard">
+      <mat-label>Filtro</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="receta" #input>
+    </mat-form-field>
+    <mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
+
+      <!-- Nombre Column -->
+      <ng-container matColumnDef="nombre">
+        <mat-header-cell *matHeaderCellDef> Nombre </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <span class="mobile-label">Nombre:</span>
+          {{element.nombre}}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="valoracion">
+        <mat-header-cell *matHeaderCellDef> Puntaje </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <span class="mobile-label">Puntaje:</span>
+          {{element.valoracion}}
+        </mat-cell>
+      </ng-container>      
+
+      <!-- Operation Column -->
+      <ng-container matColumnDef="operations">
+        <mat-header-cell *matHeaderCellDef> Operaciones </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <button mat-icon-button color="primary" (click)="newReceta()">
+            <mat-icon>description</mat-icon>
+          </button>
+          <button mat-icon-button color="primary" (click)="newReceta()">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="primary" (click)="newReceta()">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+
+  </mat-card-content>
+</mat-card>
