@@ -1,0 +1,45 @@
+<mat-card>
+    <mat-card-content>
+  
+      <mat-card-title>
+        Receta        
+      </mat-card-title>
+  
+      <br>
+      <div *ngIf="!isLoading">
+        <h5 class="m-0">{{receta.nombre}} ({{receta.valoracion}})</h5>
+      </div>
+      <mat-tab-group *ngIf="!isLoading">
+        <mat-tab label="Ingredientes">
+            <br>
+            <form>
+                <mat-form-field style="width: 140px;">
+                    <div style="width: 140px;">
+                        <input matInput type="number" placeholder="Porciones" [(ngModel)]="receta.porciones" name="porciones" min="1" max="30" style="width: 140px;">
+                    </div>                                       
+                </mat-form-field>
+                <br>
+                <ul style="width: 100%;">
+                    <li *ngFor="let item of receta.ingredientes | keyvalue">
+                        {{item.value.nombre}} {{item.value.cantidad * receta.porciones}} {{item.value.unidad}}
+                    </li>
+                </ul> 
+            </form>
+            
+        </mat-tab>        
+        <mat-tab label="Pasos">
+        <div>
+            <br>
+            <ul style="width: 100%;">
+                <li *ngFor="let paso of receta.pasos | keyvalue">
+                    {{paso.value.descripcion}}
+                </li>
+            </ul> 
+        </div>  
+        </mat-tab>        
+    </mat-tab-group>
+    </mat-card-content>
+    <div *ngIf="isLoading" style="display: flex; justify-content: center; align-items: center; background: white;">
+        <mat-spinner></mat-spinner>
+      </div>
+  </mat-card>
