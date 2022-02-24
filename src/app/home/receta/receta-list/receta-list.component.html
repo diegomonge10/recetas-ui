@@ -11,9 +11,9 @@
     <br>
     <mat-form-field appearance="standard">
       <mat-label>Filtro</mat-label>
-      <input matInput (keyup)="applyFilter($event)" placeholder="receta" #input>
+      <input matInput (keyup.enter)="applyFilter($event.target.value)" placeholder="receta" #input>
     </mat-form-field>
-    <mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
+    <mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort *ngIf="!isLoading">
 
       <!-- Nombre Column -->
       <ng-container matColumnDef="nombre">
@@ -27,8 +27,9 @@
       <ng-container matColumnDef="valoracion">
         <mat-header-cell *matHeaderCellDef> Puntaje </mat-header-cell>
         <mat-cell *matCellDef="let element">
-          <span class="mobile-label">Puntaje:</span>
-          {{element.valoracion}}
+          <mat-form-field floatLabel="never" style="width: 140px;">
+            <input matInput placeholder="Valoración" [value]="element.valoracion" [(ngModel)]="element.valoracion">
+          </mat-form-field>
         </mat-cell>
       </ng-container>      
 
@@ -36,10 +37,10 @@
       <ng-container matColumnDef="operations">
         <mat-header-cell *matHeaderCellDef> Operaciones </mat-header-cell>
         <mat-cell *matCellDef="let element">
-          <button mat-icon-button color="primary" (click)="newReceta()">
+          <button mat-icon-button color="primary" (click)="goToReceta(element.id)">
             <mat-icon>description</mat-icon>
           </button>
-          <button mat-icon-button color="primary" (click)="newReceta()">
+          <button mat-icon-button color="primary" (click)="editValoracionnewReceta(element.id, element.valoracion)">
             <mat-icon>edit</mat-icon>
           </button>
           <button mat-icon-button color="primary" (click)="newReceta()">
@@ -51,6 +52,10 @@
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
       <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
     </mat-table>
+
+    <div *ngIf="isLoading" style="display: flex; justify-content: center; align-items: center; background: white;">
+      <mat-spinner></mat-spinner>
+    </div>
 
   </mat-card-content>
 </mat-card>
