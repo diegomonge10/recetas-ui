@@ -24,13 +24,25 @@ export class RecetaService {
       return this.http.get(this.basePath, this.httpOptions);
     }
 
+    getReceta(id: number) {
+      return this.http.get(`${this.basePath}/${id}`, this.httpOptions);
+    }
+
+    getRecetaOderByValorizacion(order: string) {
+      return this.http.get(`${this.basePath}/?order=${order}`, this.httpOptions);
+    }
+
+    recetaFilterList(data: String) {
+      return this.http.get(`${this.basePath}?filter=${data}`, this.httpOptions);
+    }
+
 
     add(receta: Receta) {
       return this.http.post(this.basePath, receta, this.httpOptions);
     }
 
-    edit(receta: Receta) {
-      return this.http.put(this.basePath + '/' + receta.id, receta, this.httpOptions);
+    edit(recetaId: number, body: any) {
+      return this.http.put(this.basePath + '/' + recetaId, body, this.httpOptions);
     }
 
     delete(receta: Receta) {

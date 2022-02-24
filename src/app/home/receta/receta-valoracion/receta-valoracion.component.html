@@ -1,0 +1,68 @@
+<mat-card>
+    <mat-card-content>
+  
+      <mat-card-title>
+        Recetas
+      </mat-card-title>
+  
+      <br>
+      
+        <mat-tab-group *ngIf="!isLoadingDesc">
+            <mat-tab label="Mejor Puntae">
+                <div>
+                    <br>
+                    <mat-table [dataSource]="dataSourceDesc" class="mat-elevation-z8" matSort *ngIf="!isLoadingDesc">
+                        <!-- Nombre Column -->
+                        <ng-container matColumnDef="nombre">
+                        <mat-header-cell *matHeaderCellDef> Nombre </mat-header-cell>
+                        <mat-cell *matCellDef="let element">
+                            {{element.nombre}}
+                        </mat-cell>
+                        </ng-container>
+                
+                        <ng-container matColumnDef="valoracion">
+                        <mat-header-cell *matHeaderCellDef> Puntaje </mat-header-cell>
+                        <mat-cell *matCellDef="let element">
+                            {{element.valoracion}}
+                        </mat-cell>                  
+                        </ng-container>      
+                        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                    </mat-table>
+                
+                    <div *ngIf="isLoadingDesc" style="display: flex; justify-content: center; align-items: center; background: white;">
+                        <mat-spinner></mat-spinner>
+                    </div>                
+                </div>             
+            </mat-tab> 
+
+            <mat-tab label="Peor Puntaje" *ngIf="!isLoadingAsc">
+            <div>
+                <br>
+                <mat-table [dataSource]="dataSourceAsc" class="mat-elevation-z8" matSort *ngIf="!isLoadingAsc">
+                    <!-- Nombre Column -->
+                    <ng-container matColumnDef="nombre">
+                    <mat-header-cell *matHeaderCellDef> Nombre </mat-header-cell>
+                    <mat-cell *matCellDef="let element">
+                        {{element.nombre}}
+                    </mat-cell>
+                    </ng-container>
+            
+                    <ng-container matColumnDef="valoracion">
+                    <mat-header-cell *matHeaderCellDef> Puntaje </mat-header-cell>
+                    <mat-cell *matCellDef="let element">
+                        {{element.valoracion}}
+                    </mat-cell>                  
+                    </ng-container>      
+                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                </mat-table>
+            
+                <div *ngIf="isLoadingAsc" style="display: flex; justify-content: center; align-items: center; background: white;">
+                    <mat-spinner></mat-spinner>
+                </div>
+            </div>  
+            </mat-tab>        
+        </mat-tab-group>
+    </mat-card-content>    
+  </mat-card>
