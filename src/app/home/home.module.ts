@@ -10,6 +10,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { HomeRoutes } from './home.routing';
 import { RecetaListComponent } from './receta/receta-list/receta-list.component';
+import { RecetaDetailComponent } from './receta/receta-detail/receta-detail.component';
+import { RecetaValoracionComponent } from './receta/receta-valoracion/receta-valoracion.component';
 
 @NgModule({
   imports: [
@@ -25,6 +27,8 @@ import { RecetaListComponent } from './receta/receta-list/receta-list.component'
   providers: [],
   declarations: [
     RecetaListComponent,
+    RecetaDetailComponent,
+    RecetaValoracionComponent,
   ]
 })
 export class HomeComponentsModule {}
